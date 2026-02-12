@@ -69,6 +69,36 @@ router.post('/', async (req, res) => {
 
 //UPDATE A PRODUCT USING ID
 
+router.put('/:id', async (req, res) => {
+    try {
+
+        let id = req.params.id;
+        let {title, price, description, category, image} = req.body;
+
+        let producto = await Producto.findById(id);
+
+        if(!producto){
+            return res.status(404).json({message: `No existe un producto con id: ${id}.`});
+        }
+
+        producto.title = title;
+        producto.price = price;
+        producto.description = description;
+        producto.category = category;
+        producto.image = image;
+
+        await producto.update();
+
+        res.status(201).json({
+            message: `Se actualizó correctamente el producto con id: ${producto.id}`
+        })
+
+    } catch (error) {
+        res.status(500).json({
+            message: error.message,
+        })
+    }
+});
 
 
 //DELETE A PRODUCT BY ID

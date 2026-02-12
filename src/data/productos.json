@@ -158,5 +158,13 @@
         "description": "95%Cotton,5%Spandex, Features: Casual, Short Sleeve, Letter Print,V-Neck,Fashion Tees, The fabric is soft and has some stretch., Occasion: Casual/Office/Beach/School/Home/Street. Season: Spring,Summer,Autumn,Winter.",
         "category": "women's clothing",
         "image": "https://fakestoreapi.com/img/61pHAEJ4NML._AC_UX679_t.png"
+    },
+    {
+        "id": "2e9d2a10-89dc-4ffa-a19e-376979819b04",
+        "title": "Producto 1",
+        "price": 300.95,
+        "description": "Descripción producto 1",
+        "category": "Men's clothing",
+        "image": "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_t.png"
     }
 ]

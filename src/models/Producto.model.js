@@ -29,6 +29,26 @@ export default class Producto {
         return true;
     }
 
+    async update(){
+        let productos = await Producto.findAll();
+
+        let productoFound = productos.find(producto => producto.id == this.id);
+
+        if(!productoFound){
+            return false;
+        }
+
+        productoFound.title = this.title;
+        productoFound.price = this.price;
+        productoFound.description = this.description;
+        productoFound.category = this.category;
+        productoFound.image = this.image;
+
+        await writeData("productos.json", productos);
+        return true;
+
+    }
+
     //MÉTODOS ESTÁTICOS
     static async findAll(){
         let productos = await readData("productos.json");
@@ -36,15 +56,22 @@ export default class Producto {
     }
 
     static async findById(id){
-        let productos = await this.findAll();
+        let productos = await Producto.findAll();
 
         let productoFound = productos.find(producto => producto.id == id);
+
+        if(productoFound){
+            let { id, title, price, description, category, image } = productoFound;
+
+            return new Producto(title, price, description, category, image, id);
+        }
+        
 
         return productoFound;
     }
 
     static async deleteById(id){
-        let productos = await this.findAll();
+        let productos = await Producto.findAll();
         
         let index = productos.findIndex(producto => producto.id == id);
 
