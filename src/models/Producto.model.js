@@ -43,4 +43,19 @@ export default class Producto {
         return productoFound;
     }
 
+    static async deleteById(id){
+        let productos = await this.findAll();
+        
+        let index = productos.findIndex(producto => producto.id == id);
+
+        if(index == -1){
+            return false;
+        }else {
+
+            productos.splice(index, 1);
+            await writeData("productos.json", productos);
+            return true;
+        }
+    }
+
 }

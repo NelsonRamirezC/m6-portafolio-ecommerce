@@ -5,7 +5,7 @@ import Producto from '../models/Producto.model.js';
 const router = Router();
 
 
-
+//GET ALL PRODUCTS
 router.get('/', async (req, res) => {
     try {
         let productos = await Producto.findAll();
@@ -22,6 +22,7 @@ router.get('/', async (req, res) => {
 });
 
 
+//GET PRODUCT BY ID
 router.get('/:id', async (req, res) => {
     try {
         let id = req.params.id;
@@ -44,6 +45,7 @@ router.get('/:id', async (req, res) => {
 });
 
 
+//CREATE A NEW PRODUCT
 router.post('/', async (req, res) => {
     try {
 
@@ -63,6 +65,37 @@ router.post('/', async (req, res) => {
         })
     }
 });
+
+
+//UPDATE A PRODUCT USING ID
+
+
+
+//DELETE A PRODUCT BY ID
+
+router.delete('/:id', async (req, res) => {
+    try {
+        let id = req.params.id;
+
+        let respuesta = await Producto.deleteById(id);
+
+        if(!respuesta){
+            return res.status(404).json({message: `No existe un producto con id: ${id}.`});
+        }
+
+        res.json({
+            message: `se ha eliminado correctamente al producto con id: ${id}`
+        });
+
+
+    } catch (error) {
+        res.status(500).json({
+            message: error.message,
+        })
+    }
+});
+
+
 
 
 
