@@ -1,0 +1,46 @@
+import { v4 as uuidv4 } from 'uuid';
+import {readData, writeData} from '../utils/read_write_data.js'
+
+export default class Producto {
+    constructor(title, price, description, category, image, id = uuidv4()){
+        this.title = title;
+        this.price = price;
+        this.description = description;
+        this.category = category;
+        this.image = image;
+        this.id=id;
+    }
+
+
+    //MÉTODOS DE INSTANCIA
+
+    async save(){
+        let productos = await Producto.findAll();
+
+        let { id, title, price, description, category, image } = this;
+
+        let producto = { id, title, price, description, category, image };
+
+        productos.push(producto);
+
+        console.log(productos);
+        await writeData("productos.json", productos);
+
+        return true;
+    }
+
+    //MÉTODOS ESTÁTICOS
+    static async findAll(){
+        let productos = await readData("productos.json");
+        return productos;
+    }
+
+    static async findById(id){
+        let productos = await this.findAll();
+
+        let productoFound = productos.find(producto => producto.id == id);
+
+        return productoFound;
+    }
+
+}
