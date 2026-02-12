@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
-import {readData, writeData} from '../utils/read_write_data.js'
+import {readData, writeData} from '../utils/read_write_data.js';
 
 export default class Producto {
     constructor(title, price, description, category, image, id = uuidv4()){
